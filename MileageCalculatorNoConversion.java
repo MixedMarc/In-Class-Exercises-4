@@ -1,11 +1,8 @@
-/**
- * File: csci1302/ch16/MileageCalculator.java
- * Package: ch16
- * @author Christopher Williams
- * Created on: Apr 12, 2017
- * Last Modified: Apr 15, 2019
- * Description:  
- */
+// Marcus McFarland
+// CSCI-1302-10E
+// In-Class Exercise 4
+// Modified calculator by replacing radio buttons with combo box.
+// https://github.com/MixedMarc/In-Class-Exercises-4/tree/main
 package ch16;
 
 import javafx.application.Application;
