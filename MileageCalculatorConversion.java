@@ -1,8 +1,8 @@
 // Marcus McFarland
 // CSCI-1302-10E
-// In-Class Exercise 4
-// Modified calculator by replacing radio buttons with combo box.
-// https://github.com/MixedMarc/In-Class-Exercises-4/tree/main
+// PAssign10
+// Modified calculator to auto convert existing values.
+// 
 package ch16;
 
 import javafx.application.Application;
@@ -19,7 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class MileageCalculatorNoConversion extends Application {
+public class MileageCalculatorConversion extends Application {
 	// default values/strings
     private double txtWidth = 125.0;
     private String defaultCalc = String.format("%.2f", 0.00);
@@ -92,7 +92,7 @@ public class MileageCalculatorNoConversion extends Application {
         tfDistance.setOnAction(e -> calcMileage());
         tfCapacity.setOnAction(e -> calcMileage());
         tfResult.setOnAction(e -> calcMileage());
-        cbo.setOnAction(e -> changeLabels(convers.indexOf(cbo.getValue())));
+        cbo.setOnAction(e -> { changeLabels(convers.indexOf(cbo.getValue())); convertValues(); calcMileage();});
         //rbKPL.setOnAction(e -> changeLabels());
         //rbMPG.setOnAction(e -> changeLabels());     
         btnReset.setOnAction(e -> resetForm());
@@ -108,7 +108,27 @@ public class MileageCalculatorNoConversion extends Application {
         // stick default focus in first field for usability
         tfDistance.requestFocus();
     }
-    
+    // auto convert existing values
+        private void convertValues() {
+    	double distance = 0.0, capacity = 0.0;
+    	if (tfCapacity.getText() != null && !tfCapacity.getText().isEmpty()
+            		&& tfDistance.getText() != null && !tfDistance.getText().isEmpty()) {
+            	distance = Double.parseDouble(tfDistance.getText());
+                capacity = Double.parseDouble(tfCapacity.getText());
+            }
+    	if(cbo.getValue() == "L/100KM") {
+        	
+        	capacity = (capacity != 0) ? capacity * 3.78541 : 0;
+        	distance = (distance != 0) ? distance * 1.6094 : 0;
+        	tfDistance.setText(String.format("%.2f", distance));
+            tfCapacity.setText(String.format("%.2f", capacity));
+    	} else {
+            capacity = (capacity != 0) ? capacity/3.78541 : 0;
+        	distance = (distance != 0) ? distance/1.6094 : 0;
+        	tfDistance.setText(String.format("%.2f", distance));
+            tfCapacity.setText(String.format("%.2f", capacity));
+    	}
+    }
     /**
      * Convert existing figures and recalculate
      * This needs to be separate to avoid converting when
