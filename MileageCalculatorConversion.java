@@ -2,7 +2,7 @@
 // CSCI-1302-10E
 // PAssign10
 // Modified calculator to auto convert existing values.
-// 
+// https://github.com/MixedMarc/In-Class-Exercises-4/blob/PAssingment-10/MileageCalculatorConversion.java
 package ch16;
 
 import javafx.application.Application;
